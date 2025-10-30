@@ -1,0 +1,4 @@
+apiVersion: v2
+name: nginx-ingress
+version: 0.1.0
+description: Nginx Ingress Controller Skeleton Chart

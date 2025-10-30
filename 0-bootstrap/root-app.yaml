@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    name: cluster-root-bootstrapper
+    namespace: argocd
+spec:
+    project: default
+    source:
+        repoURL: https://github.com/naGGuri/home-lab.git
+        targetRevision: HEAD
+        path: 1-infra # L1 계층 (1-infra 디렉토리) 내의 모든 Application을 배포
+    destination:
+        server: https://kubernetes.default.svc
+        namespace: argocd
+    syncPolicy:
+        automated:
+            prune: true
+            selfHeal: true
+        syncOptions:
+            - CreateNamespace=true

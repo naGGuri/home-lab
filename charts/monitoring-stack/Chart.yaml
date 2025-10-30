@@ -1,0 +1,4 @@
+apiVersion: v2
+name: monitoring-stack
+version: 0.1.0
+description: Prometheus and Grafana Skeleton Chart
