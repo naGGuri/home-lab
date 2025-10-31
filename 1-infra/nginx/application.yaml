@@ -6,9 +6,22 @@ metadata:
 spec:
     project: default
     source:
-        repoURL: https://github.com/$GITHUB_USER/home-lab.git
-        targetRevision: HEAD
-        path: charts/nginx-ingress
+        # 공식 Nginx Helm 레포지토리 URL로 변경
+        repoURL: https://kubernetes.github.io/ingress-nginx
+        # 안정적인 Chart 버전을 명시 (Git Tag 대신 Chart Version)
+        targetRevision: controller-v1.9.4
+        # 배포할 Chart 이름 명시
+        chart: ingress-nginx
+        #Helm Value 오버라이드 (Home-Lab 환경 설정)
+        helm:
+            values: |
+                controller:
+                  replicaCount: 1
+                  service:
+                    type: NodePort
+                    nodePorts:
+                      http: 30080
+                      https: 30443
     destination:
         server: https://kubernetes.default.svc
         namespace: ingress-nginx
